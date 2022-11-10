@@ -28,12 +28,24 @@ const run = async () => {
       const services = await cursor.toArray();
       res.send(services);
     });
+    app.get("/product/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await productsCollection.findOne(query);
+      res.send(result);
+    });
 
     app.get("/product3", async (req, res) => {
       const query = {};
       const cursor = productsCollection.find(query);
       const services = await cursor.limit(3).toArray();
       res.send(services);
+    });
+
+    app.post("/product", async (req, res) => {
+      const order = req.body;
+      const result = await productsCollection.insertOne(order);
+      res.send(result);
     });
   } finally {
   }
