@@ -99,6 +99,13 @@ const run = async () => {
       const result = await cursor.limit(5).toArray();
       res.send(result);
     });
+    app.get("/review/:id", async (req, res) => {
+      const id = req.params.id;
+      let query = { id: id };
+      const cursor = reviewsCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
 
     app.post("/review", async (req, res) => {
       const order = req.body;
