@@ -43,7 +43,6 @@ const run = async () => {
       res.send(result);
     });
 
-
     app.get("/my-products", async (req, res) => {
       let query = {};
       if (req.query.email) {
@@ -56,6 +55,7 @@ const run = async () => {
       res.send(result);
     });
 
+    
     app.post("/product", async (req, res) => {
       const order = req.body;
       const result = await productsCollection.insertOne(order);
